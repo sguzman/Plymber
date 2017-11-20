@@ -22,14 +22,14 @@ statementTripUrl = 'https://partners.uber.com/p3/money/statements/view/'
 
 
 def req(uuid):
-    print('Processing statement uuid', uuid)
+    print('Processing statement uuid', uuid, file=sys.stderr)
     j = requests.get(statementTripUrl + uuid, headers=head).json()
     return j
 
 
 def trips(js):
     triplist = list(js['body']['driver']['trip_earnings']['trips'].keys())
-    print('Extracted trip uuid list', triplist)
+    print('Extracted trip uuid list', triplist, file=sys.stderr)
     return triplist
 
 
@@ -41,7 +41,7 @@ tripUrl = 'https://partners.uber.com/p3/money/trips/trip_data/'
 
 
 def reqtrip(uuid):
-    print('Processing trip uuid', uuid)
+    print('Processing trip uuid', uuid, file=sys.stderr)
     j = requests.get(tripUrl + uuid, headers=head).json()
     return j
 
