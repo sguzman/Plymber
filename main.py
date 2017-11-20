@@ -1,9 +1,17 @@
 import requests
 import sys
 from joblib import Parallel, delayed
+import uber
 
 
-cookies = sys.argv[1]
+cookies = ''
+if len(sys.argv) is 2:
+    cookies = sys.argv[1]
+else:
+    cookiesDict = uber.cookie()
+    cookies = '; '.join(['{}={}'.format(x, cookiesDict[x]) for x in cookiesDict.keys()])
+
+
 head = {'Cookie': cookies}
 
 url = 'https://partners.uber.com/p3/money/statements/all_data/'
