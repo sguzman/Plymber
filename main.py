@@ -33,7 +33,7 @@ def trips(js):
     return triplist
 
 
-statements = Parallel(n_jobs=16, backend='threading')(delayed(req)(u) for u in uuids)
+statements = Parallel(n_jobs=16)(delayed(req)(u) for u in uuids)
 tripsList = [trips(j) for j in statements]
 tripy = [k for j in tripsList for k in j]
 
@@ -46,6 +46,6 @@ def reqtrip(uuid):
     return j
 
 
-tripBody = Parallel(n_jobs=32, backend='threading')(delayed(reqtrip)(u) for u in tripy)
+tripBody = Parallel(n_jobs=32)(delayed(reqtrip)(u) for u in tripy)
 
 print(tripBody)
